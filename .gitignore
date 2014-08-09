@@ -1,0 +1,62 @@
+#Logs
+application/logs/*.php
+
+# Content types
+/application/xml/types/*.xml
+
+# Custom builds and generated php files
+/core/documentation/build
+/core/views/admin/content/translations.php
+
+# Attachs and cache files #
+*.tmp
+/attach/cache/
+/attach/
+/application/cache/_bancha/*.css
+/application/cache/_bancha/*.js
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows
+# =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Ignore project
+
+node_modules
+components
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp

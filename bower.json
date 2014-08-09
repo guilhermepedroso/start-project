@@ -1,0 +1,11 @@
+{
+  "name": "project-name",
+  "version": "0.0.0",
+  "homepage": "https://github.com/guimeop/start-project",
+  "authors": [
+    "Guilherme Pedroso <guimeop@gmail.com>"
+  ],
+  "dependencies": {
+    "bourbon": "~4.0.2"
+  }
+}
