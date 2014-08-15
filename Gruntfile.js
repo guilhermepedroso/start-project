@@ -12,8 +12,12 @@ module.exports = function(grunt) {
             css:        'css/',
             image:      'img/',
 
-            urlPageres: '',
+            urlPageres: 'http://www.walmart.com.br/',
             screenshot: 'screenshots'
+        },
+
+        pkg: {
+
         },
 
         // Watch: Tasks to watch
@@ -66,26 +70,27 @@ module.exports = function(grunt) {
         //     }
         // },
 
-        autoprefixer: {
-            dev: {
-              options: {
-                browsers: ['last 2 version', 'ie 8', 'ie 9']
-              },
-              src: 'css/main.css',
-              dest: 'dist/css/main.css'
-            },
-        },
+        // autoprefixer: {
+        //     dev: {
+        //       options: {
+        //         browsers: ['last 2 version', 'ie 8', 'ie 9']
+        //       },
+        //       src: 'css/main.css',
+        //       dest: 'dist/css/main.css'
+        //     },
+        // },
 
         // BrowserSybc: Live reload
         browserSync: {
             files: {
                 src : [
                     '**/*.css',
-                    '**/*.js',
-                    '*.html'
+                    '*.html',
+                    '*.php'
                 ],
             },
             options: {
+                host: 'http://127.0.0.1',
                 server: {
                     baseDir: "."
                 },
@@ -136,6 +141,12 @@ module.exports = function(grunt) {
                     message: 'Imagens otimizadas com sucesso!'
                 }
             },
+            buildprod: {
+                options: {
+                    title: 'Build Prod',
+                    message: 'Todas as tarefas executadas!'
+                }
+            }
         },
 
         // CMQ: Combine Media Queries
@@ -147,15 +158,23 @@ module.exports = function(grunt) {
             }
         },
 
+        imagemin: {
+            prod: {
+                options: {
+                    optimizationLevel: 7,
+                    progressive: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.image %>',
+                    src: ['**/*.{png,jpg,gif}'],
+                    cwd: '<%= paths.image %>'
+                }]
+            }
+        }
     });
 
     // Tasks
-
-    // BrowserSync with Watch
-    grunt.registerTask('default', [
-        'browserSync',
-        'watch'
-    ]);
 
     // Screenshot website
     grunt.registerTask('screenshot', [
@@ -163,14 +182,25 @@ module.exports = function(grunt) {
         'notify:screenshots'
     ]);
 
+    // Screenshot website
+    grunt.registerTask('compressimages', [
+        'imagemin',
+        'notify:compressimage'
+    ]);
+
     // Build
     grunt.registerTask('build', [
-        'cmq:prod'
+        'cmq:prod',
+        'imagemin',
+        'notify:buildprod'
     ]);
 
     // Watch
     grunt.registerTask('w', ['watch']);
 
-    // ver prefixer
-
+    // BrowserSync with Watch (Default)
+    grunt.registerTask('default', [
+        'browserSync',
+        'watch'
+    ]);
 };
